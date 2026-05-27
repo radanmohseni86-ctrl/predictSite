@@ -1,0 +1,50 @@
+{% extends 'games/base.html' %}
+{% block title %}My Bets{% endblock %}
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 16px;">
+    <h2>Your Bets</h2>
+    <div style="display: flex; gap: 12px;">
+        <a href="{% url 'games:deposit' %}" class="btn" style="background: #10b981; text-decoration: none; color: white; display: inline-flex; align-items: center; gap: 6px;">
+            <svg class="icon" viewBox="0 0 24 24" style="stroke:white;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Deposit
+        </a>
+        <a href="{% url 'games:withdraw' %}" class="btn" style="background: #ef4444; text-decoration: none; color: white; display: inline-flex; align-items: center; gap: 6px;">
+            <svg class="icon" viewBox="0 0 24 24" style="stroke:white;"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Withdraw
+        </a>
+    </div>
+</div>
+<div class="card" style="margin-bottom: 20px; margin-top: 16px;">
+    <p>
+        <svg class="icon" viewBox="0 0 24 24" style="vertical-align: middle;"><path d="M12 2v20M17 7l-5-5-5 5"/></svg>
+        Balance: <strong style="color: #10b981;">{{ balance|floatformat:0 }}</strong> Toman
+    </p>
+</div>
+
+{% if bets %}
+    <div style="overflow-x: auto;">
+        <table>
+            <thead>
+                <tr><th>Match</th><th>Bet Type</th><th>Amount</th><th>Placed</th><th>Status</th><th>Result</th></tr>
+            </thead>
+            <tbody>
+                {% for bet in bets %}
+                <tr>
+                    <td>{{ bet.bet_option.game.home_team }} vs {{ bet.bet_option.game.away_team }}</td>
+                    <td><strong>{{ bet.bet_option.description }}</strong> ({{ bet.bet_option.odds }})</td>
+                    <td>{{ bet.amount }}</td>
+                    <td>{{ bet.placed_at|date:"Y/m/d H:i" }}</td>
+                    <td>{% if bet.is_settled %}Settled{% else %}Pending{% endif %}</td>
+                    <td>{% if bet.is_settled %}{% if bet.won %}Won (+{{ bet.payout }}){% else %}Lost{% endif %}{% else %}-{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="card" style="text-align: center;">
+        <p>No bets yet.</p>
+        <a href="{% url 'games:game_list' %}"><button style="margin-top: 12px;">Browse Games</button></a>
+    </div>
+{% endif %}
+{% endblock %}

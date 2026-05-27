@@ -1,0 +1,105 @@
+{% extends 'games/base.html' %}
+{% block title %}Place Bet{% endblock %}
+{% block content %}
+<div style="max-width: 700px; margin: 0 auto;">
+    <div class="card" style="padding: 30px; text-align: center;">
+        <!-- عنوان بزرگ مسابقه -->
+        <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 8px; color: #1e293b;">
+            {{ game.home_team }} <span style="font-weight: 400;">vs</span> {{ game.away_team }}
+        </h1>
+        <p class="text-muted" style="margin-bottom: 24px;">{{ game.start_time|date:"l, d M Y - H:i" }}</p>
+
+        <div style="background:#f0fdf4; display:inline-block; padding:8px 20px; border-radius:60px; margin-bottom: 32px;">
+            <svg class="icon" viewBox="0 0 24 24" style="vertical-align: middle; width: 18px; height: 18px;"><path d="M12 2v20M17 7l-5-5-5 5"/></svg>
+            Balance: <strong class="balance">{{ balance|floatformat:0 }}</strong>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- گزینه‌های شرط به صورت کارت‌های انتخابی -->
+            <div style="margin-bottom: 32px;">
+                <label style="font-weight: 600; display: block; margin-bottom: 16px;">Select bet type</label>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px;">
+                    {% for option in form.bet_option.field.queryset %}
+                        <label class="bet-option-card" style="cursor: pointer;">
+                            <input type="radio" name="bet_option" value="{{ option.id }}" style="display: none;" {% if form.bet_option.value|stringformat:"s" == option.id|stringformat:"s" %}checked{% endif %}>
+                            <div class="card-option">
+                                <div class="option-name">{{ option.description }}</div>
+                                <div class="option-odds">{{ option.odds }}</div>
+                            </div>
+                        </label>
+                    {% endfor %}
+                </div>
+                {% if form.bet_option.errors %}
+                    <div class="text-muted" style="color: #ef4444; margin-top: 12px;">{{ form.bet_option.errors }}</div>
+                {% endif %}
+            </div>
+
+            <!-- فیلد مبلغ -->
+            <div class="form-group" style="text-align: left; max-width: 300px; margin: 0 auto 32px auto;">
+                <label for="id_amount">Amount</label>
+                <input type="number" name="amount" id="id_amount" step="0.01" min="0.01" value="{{ form.amount.value|default:'' }}" placeholder="e.g., 50.00" required>
+                {% if form.amount.errors %}
+                    <div class="text-muted" style="color: #ef4444; margin-top: 8px;">{{ form.amount.errors }}</div>
+                {% endif %}
+            </div>
+
+            <button type="submit" style="width: 100%; max-width: 300px; margin: 0 auto; display: block;">Confirm Bet</button>
+        </form>
+
+        <div style="text-align: center; margin-top: 32px;">
+            <a href="{% url 'games:game_list' %}" class="text-muted">← Back to games</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bet-option-card {
+        transition: all 0.2s ease;
+    }
+    .card-option {
+        background: #f9fafb;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 24px;
+        padding: 16px 12px;
+        text-align: center;
+        transition: 0.2s;
+    }
+    .bet-option-card:hover .card-option {
+        border-color: #3b82f6;
+        background: #eff6ff;
+        transform: translateY(-2px);
+    }
+    input[type="radio"]:checked + .card-option,
+    .bet-option-card:has(input:checked) .card-option {
+        background: #eef2ff;
+        border-color: #2563eb;
+        box-shadow: 0 4px 12px rgba(37,99,235,0.2);
+    }
+    .option-name {
+        font-weight: 700;
+        margin-bottom: 6px;
+        font-size: 1rem;
+    }
+    .option-odds {
+        font-size: 0.85rem;
+        color: #6b7280;
+    }
+    /* مرکز کردن فیلد مبلغ و دکمه */
+    .form-group input {
+        width: 100%;
+    }
+</style>
+
+<script>
+    document.querySelectorAll('.bet-option-card').forEach(card => {
+        const radio = card.querySelector('input[type="radio"]');
+        card.addEventListener('click', () => {
+            radio.checked = true;
+            document.querySelectorAll('.bet-option-card input').forEach(r => r.checked = false);
+            radio.checked = true;
+        });
+    });
+</script>
+{% endblock %}

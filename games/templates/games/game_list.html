@@ -1,0 +1,75 @@
+{% extends 'games/base.html' %}
+{% block title %}Games{% endblock %}
+{% block content %}
+<h2>All matches</h2>
+<div class="game-grid">
+    {% for game in games %}
+        <a href="{% url 'games:place_bet' game.id %}" class="card-link">
+            <div class="card game-card">
+                <div style="display: flex; justify-content: space-between;">
+                    <strong>{{ game.home_team }}</strong> <span>vs</span> <strong>{{ game.away_team }}</strong>
+                </div>
+                <div class="text-muted" style="margin: 12px 0;">{{ game.start_time|date:"d M Y, H:i" }}</div>
+                <div class="bet-options-wrapper">
+                    {% for option in game.bet_options.all %}
+                        <span class="bet-option-badge">{{ option.description }} ({{ option.odds }})</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </a>
+    {% empty %}
+        <div class="card">No games available</div>
+    {% endfor %}
+</div>
+
+<style>
+    .game-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
+        margin-top: 24px;
+        align-items: stretch;
+    }
+    .card-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        transition: transform 0.2s ease;
+        height: 100%;
+    }
+    .card-link:hover {
+        transform: translateY(-4px);
+    }
+    .card-link:hover .card {
+        border-color: #2563eb;
+        box-shadow: 0 12px 24px -12px rgba(0,0,0,0.15);
+    }
+    .game-card {
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between;
+    }
+    .bet-options-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+        margin-bottom: 8px;
+    }
+    .bet-option-badge {
+        background: #f3f4f6;
+        padding: 4px 12px;
+        border-radius: 40px;
+        font-size: 0.8rem;
+        color: #4b5563;
+    }
+    /* برای اطمینان از یکسان بودن ارتفاع در تمام حالت‌ها */
+    .card-link,
+    .game-card {
+        height: 100%;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'games/base.html' %}
+{% block title %}Sign up{% endblock %}
+{% block content %}
+<div style="max-width: 440px; margin: 60px auto;">
+    <div class="card">
+        <h2>Create account</h2>
+        <p class="text-muted" style="margin-bottom: 28px;">Join to start betting</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Choose a username" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password1" placeholder="Create a password" required>
+            </div>
+            <div class="form-group">
+                <label>Confirm password</label>
+                <input type="password" name="password2" placeholder="Repeat password" required>
+            </div>
+            <button type="submit">Sign up</button>
+        </form>
+        <p style="margin-top: 24px; text-align: center;">Already have an account? <a href="{% url 'games:login' %}" style="color: #3b82f6;">Login</a></p>
+    </div>
+</div>
+{% endblock %}

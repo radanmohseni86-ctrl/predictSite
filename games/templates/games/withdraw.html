@@ -1,0 +1,25 @@
+{% extends 'games/base.html' %}
+{% block title %}Withdraw{% endblock %}
+{% block content %}
+<div style="max-width: 500px; margin: 0 auto;">
+    <div class="card" style="padding: 30px;">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <h2>Withdraw</h2>
+            <p class="text-muted">Balance: <strong>{{ balance|floatformat:0 }}</strong> Toman</p>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_amount">Amount (Toman)</label>
+                <input type="number" name="amount" id="id_amount" step="0.01" min="0.01" placeholder="e.g., 5000" required>
+                <small class="text-muted">Positive amount (cannot exceed balance)</small>
+                {{ form.amount.errors }}
+            </div>
+            <button type="submit" style="background: #ef4444;">Withdraw</button>
+        </form>
+        <div style="text-align: center; margin-top: 24px;">
+            <a href="{% url 'games:user_panel' %}" class="text-muted">← Back to panel</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
