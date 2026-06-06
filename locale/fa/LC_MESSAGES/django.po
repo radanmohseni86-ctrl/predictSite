@@ -1,0 +1,292 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-06 16:31+0330\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Predict"
+msgstr "پیش‌بینی"
+
+msgid "Home"
+msgstr "خانه"
+
+msgid "Matches"
+msgstr "مسابقات"
+
+msgid "Panel"
+msgstr "پنل کاربری"
+
+msgid "Logout"
+msgstr "خروج"
+
+msgid "Login"
+msgstr "ورود"
+
+msgid "Sign up"
+msgstr "ثبت‌نام"
+
+msgid "Coins"
+msgstr "سکه"
+
+msgid "PREDICT THE"
+msgstr "پیش‌بینی"
+
+msgid "WORLD CUP"
+msgstr "جام جهانی"
+
+msgid "Select a group below to view upcoming matches and make your predictions to earn coins."
+msgstr "یک گروه را انتخاب کنید تا مسابقات آینده را ببینید و با پیش‌بینی خود سکه دریافت کنید."
+
+msgid "All Upcoming Matches"
+msgstr "تمام مسابقات پیش‌رو"
+
+msgid "Matches for Group"
+msgstr "مسابقات گروه"
+
+msgid "No matches added yet for Group"
+msgstr "هنوز مسابقه‌ای در دیتابیس برای این گروه اضافه نشده:"
+
+msgid "Admin needs to add these matches in the dashboard."
+msgstr "مدیر باید این مسابقات را از پنل ادمین (Django Admin) اضافه کند."
+
+msgid "Show All Matches"
+msgstr "نمایش همه مسابقات"
+
+msgid "No matches available at the moment."
+msgstr "در حال حاضر هیچ مسابقه‌ای در دسترس نیست."
+
+msgid "Welcome back"
+msgstr "خوش آمدید"
+
+msgid "Sign in to make predictions"
+msgstr "برای ثبت پیش‌بینی وارد شوید"
+
+msgid "Username"
+msgstr "نام کاربری"
+
+msgid "Enter your username"
+msgstr "نام کاربری خود را وارد کنید"
+
+msgid "Password"
+msgstr "رمز عبور"
+
+msgid "Sign in"
+msgstr "ورود به حساب"
+
+msgid "No account?"
+msgstr "حساب کاربری ندارید؟"
+
+msgid "Create one"
+msgstr "یکی بسازید"
+
+msgid "Create account"
+msgstr "ایجاد حساب کاربری"
+
+msgid "Join to start predicting the World Cup"
+msgstr "برای پیش‌بینی مسابقات جام جهانی عضو شوید"
+
+msgid "Choose a username"
+msgstr "یک نام کاربری انتخاب کنید"
+
+msgid "Email"
+msgstr "ایمیل"
+
+msgid "your@email.com"
+msgstr "ایمیل شما"
+
+msgid "Create a password"
+msgstr "یک رمز عبور بسازید"
+
+msgid "Confirm password"
+msgstr "تکرار رمز عبور"
+
+msgid "Repeat password"
+msgstr "رمز عبور را تکرار کنید"
+
+msgid "Already have an account?"
+msgstr "از قبل حساب دارید؟"
+
+msgid "Make Prediction"
+msgstr "ثبت پیش‌بینی"
+
+msgid "Balance:"
+msgstr "موجودی:"
+
+msgid "Select Prediction Type"
+msgstr "نوع پیش‌بینی را انتخاب کنید"
+
+msgid "Amount (Coins)"
+msgstr "مقدار (سکه)"
+
+msgid "Confirm Prediction"
+msgstr "تایید پیش‌بینی"
+
+msgid "My Bets"
+msgstr "پیش‌بینی‌های من"
+
+msgid "Your Predictions"
+msgstr "پیش‌بینی‌های شما"
+
+msgid "Score Balance:"
+msgstr "موجودی امتیاز:"
+
+msgid "Match"
+msgstr "مسابقه"
+
+msgid "Bet Type"
+msgstr "نوع پیش‌بینی"
+
+msgid "Date"
+msgstr "تاریخ"
+
+msgid "Status"
+msgstr "وضعیت"
+
+msgid "Result"
+msgstr "نتیجه"
+
+msgid "Settled"
+msgstr "مشخص شده"
+
+msgid "Pending"
+msgstr "در انتظار"
+
+msgid "Won"
+msgstr "برد"
+
+msgid "Lost"
+msgstr "باخت"
+
+msgid "No predictions yet."
+msgstr "هنوز پیش‌بینی‌ای ثبت نکرده‌اید."
+
+msgid "Browse Games"
+msgstr "مشاهده مسابقات"
+
+msgid "Mexico"
+msgstr "مکزیک"
+msgid "South Africa"
+msgstr "آفریقای جنوبی"
+msgid "South Korea"
+msgstr "کره جنوبی"
+msgid "Czech Republic"
+msgstr "جمهوری چک"
+msgid "Canada"
+msgstr "کانادا"
+msgid "Bosnia"
+msgstr "بوسنی"
+msgid "Qatar"
+msgstr "قطر"
+msgid "Switzerland"
+msgstr "سوئیس"
+msgid "Brazil"
+msgstr "برزیل"
+msgid "Morocco"
+msgstr "مراکش"
+msgid "Haiti"
+msgstr "هائیتی"
+msgid "Scotland"
+msgstr "اسکاتلند"
+msgid "USA"
+msgstr "آمریکا"
+msgid "Paraguay"
+msgstr "پاراگوئه"
+msgid "Australia"
+msgstr "استرالیا"
+msgid "Turkey"
+msgstr "ترکیه"
+msgid "Germany"
+msgstr "آلمان"
+msgid "Curacao"
+msgstr "کوراسائو"
+msgid "Ecuador"
+msgstr "اکوادور"
+msgid "Ivory Coast"
+msgstr "ساحل عاج"
+msgid "Netherlands"
+msgstr "هلند"
+msgid "Japan"
+msgstr "ژاپن"
+msgid "Sweden"
+msgstr "سوئد"
+msgid "Tunisia"
+msgstr "تونس"
+msgid "Belgium"
+msgstr "بلژیک"
+msgid "Egypt"
+msgstr "مصر"
+msgid "Iran"
+msgstr "ایران"
+msgid "New Zealand"
+msgstr "نیوزیلند"
+msgid "Spain"
+msgstr "اسپانیا"
+msgid "Cabo Verde"
+msgstr "کیپ ورد"
+msgid "Saudi Arabia"
+msgstr "عربستان"
+msgid "Uruguay"
+msgstr "اروگوئه"
+msgid "France"
+msgstr "فرانسه"
+msgid "Senegal"
+msgstr "سنگال"
+msgid "Iraq"
+msgstr "عراق"
+msgid "Norway"
+msgstr "نروژ"
+msgid "Argentina"
+msgstr "آرژانتین"
+msgid "Algeria"
+msgstr "الجزایر"
+msgid "Austria"
+msgstr "اتریش"
+msgid "Jordan"
+msgstr "اردن"
+msgid "Portugal"
+msgstr "پرتغال"
+msgid "DR Congo"
+msgstr "کنگو"
+msgid "Colombia"
+msgstr "کلمبیا"
+msgid "Uzbekistan"
+msgstr "ازبکستان"
+msgid "England"
+msgstr "انگلیس"
+msgid "Croatia"
+msgstr "کرواسی"
+msgid "Ghana"
+msgstr "غنا"
+msgid "Panama"
+msgstr "پاناما"
+msgid "Bosnia and Herzegovina"
+msgstr "بوسنی و هرزگوین"
+
+msgid "United States"
+msgstr "ایالات متحده آمریکا"
+
+msgid "Türkiye"
+msgstr "ترکیه"
+
+msgid "Curaçao"
+msgstr "کوراسائو"
+
+msgid "Ivory Coast"
+msgstr "ساحل عاج"
+
+msgid "New Zealand"
+msgstr "نیوزیلند"

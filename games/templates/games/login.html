@@ -1,23 +1,27 @@
 {% extends 'games/base.html' %}
-{% block title %}Login{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Login" %}{% endblock %}
 {% block content %}
 <div style="max-width: 440px; margin: 60px auto;">
     <div class="card">
-        <h2>Welcome back</h2>
-        <p class="text-muted" style="margin-bottom: 28px;">Sign in to continue</p>
+        <h2 style="margin-bottom: 8px;">{% trans "Welcome back" %}</h2>
+        <p class="text-muted" style="margin-bottom: 28px;">{% trans "Sign in to make predictions" %}</p>
         <form method="post">
             {% csrf_token %}
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" name="username" placeholder="Enter your username" required autofocus>
+            <div style="margin-bottom: 20px;">
+                <label style="color: var(--text-color); font-weight: 500;">{% trans "Username" %}</label>
+                <input type="text" name="username" placeholder="{% trans 'Enter your username' %}" required autofocus>
             </div>
-            <div class="form-group">
-                <label>Password</label>
+            <div style="margin-bottom: 24px;">
+                <label style="color: var(--text-color); font-weight: 500;">{% trans "Password" %}</label>
                 <input type="password" name="password" placeholder="••••••••" required>
             </div>
-            <button type="submit">Sign in</button>
+            <button type="submit" style="width: 100%;">{% trans "Sign in" %}</button>
         </form>
-        <p style="margin-top: 24px; text-align: center;">No account? <a href="{% url 'games:register' %}" style="color: #3b82f6;">Create one</a></p>
+        <p style="margin-top: 24px; text-align: center; color: var(--muted-text);">
+            {% trans "No account?" %}
+            <a href="{% url 'games:register' %}" style="color: var(--accent); text-decoration: none; font-weight: bold;">{% trans "Create one" %}</a>
+        </p>
     </div>
 </div>
 {% endblock %}

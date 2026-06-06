@@ -1,49 +1,193 @@
 {% extends 'games/base.html' %}
-{% block title %}Home{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "World Cup 2026 Predictions" %}{% endblock %}
 {% block content %}
-<div style="text-align: center; max-width: 900px; margin: 0 auto; padding: 40px 20px;">
-    <!-- Hero section -->
-    <h1 style="font-size: 2.8rem; font-weight: 800; background: linear-gradient(135deg, #2563eb, #7c3aed); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 16px;">
-        Bet on your instincts
+<style>
+    .groups-container {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px; margin-bottom: 60px;
+    }
+    .group-card {
+        background: var(--card-bg); border: 2px solid var(--card-border);
+        border-radius: 20px; padding: 24px; cursor: pointer; transition: all 0.3s ease;
+        box-shadow: 0 4px 15px var(--shadow);
+    }
+    .group-card:hover {
+        transform: translateY(-8px) scale(1.02); border-color: var(--secondary);
+        box-shadow: 0 12px 30px rgba(236, 72, 153, 0.2);
+    }
+    .group-header {
+        font-size: 1.8rem; font-weight: 900; color: var(--primary);
+        margin-bottom: 20px; text-align: center; letter-spacing: 2px;
+    }
+    .team-row {
+        display: flex; align-items: center; gap: 16px; padding: 10px 0;
+        border-bottom: 1px solid var(--card-border); font-size: 1.15rem; font-weight: 600;
+    }
+    .team-row:last-child { border-bottom: none; }
+    .flag { font-size: 1.8rem; }
+</style>
+
+<div style="text-align: center; padding: 40px 0;">
+    <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 16px;">
+        <span style="color: var(--text-color);">{% trans "PREDICT THE" %}</span>
+        <span style="background: linear-gradient(to right, var(--accent), #60efff); -webkit-background-clip: text; color: transparent;">{% trans "WORLD CUP" %}</span>
     </h1>
-    <p style="font-size: 1.15rem; color: #4b5563; margin-bottom: 32px; max-width: 550px; margin-left: auto; margin-right: auto; line-height: 1.5;">
-        The most exciting prediction platform. Compete, win, and withdraw instantly.
+    <p style="font-size: 1.2rem; color: var(--muted-text); margin-bottom: 50px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        {% trans "Select a group below to view upcoming matches and make your predictions to earn coins." %}
     </p>
 
-    {% if not user.is_authenticated %}
-        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-            <a href="{% url 'games:register' %}"><button style="padding: 12px 28px;">Get Started →</button></a>
-            <a href="{% url 'games:login' %}"><button style="background: transparent; border: 1px solid #cbd5e1; color: #1e293b;">Login</button></a>
+    <div class="groups-container">
+        <div class="group-card" onclick='filterGroup("A", ["Mexico", "South Africa", "South Korea", "Czech Republic"], ["مکزیک", "آفریقای جنوبی", "کره جنوبی", "جمهوری چک"])'>
+            <div class="group-header">GROUP A</div>
+            <div class="team-row"><span class="flag">🇲🇽</span> <span>{% trans "Mexico" %}</span></div>
+            <div class="team-row"><span class="flag">🇿🇦</span> <span>{% trans "South Africa" %}</span></div>
+            <div class="team-row"><span class="flag">🇰🇷</span> <span>{% trans "South Korea" %}</span></div>
+            <div class="team-row"><span class="flag">🇨🇿</span> <span>{% trans "Czech Republic" %}</span></div>
         </div>
-    {% else %}
-        <div style="display: flex; gap: 16px; justify-content: center;">
-            <a href="{% url 'games:game_list' %}"><button>Browse Games</button></a>
-            <a href="{% url 'games:deposit' %}"><button style="background: #10b981;">Deposit</button></a>
+        <div class="group-card" onclick='filterGroup("B", ["Canada", "Bosnia", "Qatar", "Switzerland"], ["کانادا", "بوسنی", "قطر", "سوئیس"])'>
+            <div class="group-header">GROUP B</div>
+            <div class="team-row"><span class="flag">🇨🇦</span> <span>{% trans "Canada" %}</span></div>
+            <div class="team-row"><span class="flag">🇧🇦</span> <span>{% trans "Bosnia" %}</span></div>
+            <div class="team-row"><span class="flag">🇶🇦</span> <span>{% trans "Qatar" %}</span></div>
+            <div class="team-row"><span class="flag">🇨🇭</span> <span>{% trans "Switzerland" %}</span></div>
         </div>
-    {% endif %}
-
-    <!-- Features section -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin-top: 70px;">
-        <div>
-            <svg class="icon" viewBox="0 0 24 24" width="36" height="36" style="stroke:#2563eb; margin-bottom: 16px;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-            <h3 style="font-size: 1.2rem;">Instant Bets</h3>
-            <p class="text-muted" style="max-width: 180px; margin: 8px auto 0;">Place bets on multiple outcomes in seconds</p>
+        <div class="group-card" onclick='filterGroup("C", ["Brazil", "Morocco", "Haiti", "Scotland"], ["برزیل", "مراکش", "هائیتی", "اسکاتلند"])'>
+            <div class="group-header">GROUP C</div>
+            <div class="team-row"><span class="flag">🇧🇷</span> <span>{% trans "Brazil" %}</span></div>
+            <div class="team-row"><span class="flag">🇲🇦</span> <span>{% trans "Morocco" %}</span></div>
+            <div class="team-row"><span class="flag">🇭🇹</span> <span>{% trans "Haiti" %}</span></div>
+            <div class="team-row"><span class="flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span> <span>{% trans "Scotland" %}</span></div>
         </div>
-        <div>
-            <svg class="icon" viewBox="0 0 24 24" width="36" height="36" style="stroke:#10b981; margin-bottom: 16px;"><circle cx="12" cy="12" r="10"/><path d="M16 8L8 16M8 8l8 8"/></svg>
-            <h3 style="font-size: 1.2rem;">Fast Withdrawals</h3>
-            <p class="text-muted" style="max-width: 180px; margin: 8px auto 0;">Withdraw your winnings anytime, no limits</p>
+        <div class="group-card" onclick='filterGroup("D", ["USA", "Paraguay", "Australia", "Turkey"], ["آمریکا", "پاراگوئه", "استرالیا", "ترکیه"])'>
+            <div class="group-header">GROUP D</div>
+            <div class="team-row"><span class="flag">🇺🇸</span> <span>{% trans "USA" %}</span></div>
+            <div class="team-row"><span class="flag">🇵🇾</span> <span>{% trans "Paraguay" %}</span></div>
+            <div class="team-row"><span class="flag">🇦🇺</span> <span>{% trans "Australia" %}</span></div>
+            <div class="team-row"><span class="flag">🇹🇷</span> <span>{% trans "Turkey" %}</span></div>
         </div>
-        <div>
-            <svg class="icon" viewBox="0 0 24 24" width="36" height="36" style="stroke:#f59e0b; margin-bottom: 16px;"><path d="M12 2L15 8.5L22 9.5L17 14L18.5 21L12 17.5L5.5 21L7 14L2 9.5L9 8.5L12 2Z"/></svg>
-            <h3 style="font-size: 1.2rem;">Live Odds</h3>
-            <p class="text-muted" style="max-width: 180px; margin: 8px auto 0;">Competitive odds updated for every match</p>
+        <div class="group-card" onclick='filterGroup("E", ["Germany", "Curacao", "Ecuador", "Ivory Coast"], ["آلمان", "کوراسائو", "اکوادور", "ساحل عاج"])'>
+            <div class="group-header">GROUP E</div>
+            <div class="team-row"><span class="flag">🇩🇪</span> <span>{% trans "Germany" %}</span></div>
+            <div class="team-row"><span class="flag">🇨🇼</span> <span>{% trans "Curacao" %}</span></div>
+            <div class="team-row"><span class="flag">🇪🇨</span> <span>{% trans "Ecuador" %}</span></div>
+            <div class="team-row"><span class="flag">🇨🇮</span> <span>{% trans "Ivory Coast" %}</span></div>
         </div>
-        <div>
-            <svg class="icon" viewBox="0 0 24 24" width="36" height="36" style="stroke:#6b7280; margin-bottom: 16px;"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            <h3 style="font-size: 1.2rem;">Secure</h3>
-            <p class="text-muted" style="max-width: 180px; margin: 8px auto 0;">Your balance and data are fully protected</p>
+        <div class="group-card" onclick='filterGroup("F", ["Netherlands", "Japan", "Sweden", "Tunisia"], ["هلند", "ژاپن", "سوئد", "تونس"])'>
+            <div class="group-header">GROUP F</div>
+            <div class="team-row"><span class="flag">🇳🇱</span> <span>{% trans "Netherlands" %}</span></div>
+            <div class="team-row"><span class="flag">🇯🇵</span> <span>{% trans "Japan" %}</span></div>
+            <div class="team-row"><span class="flag">🇸🇪</span> <span>{% trans "Sweden" %}</span></div>
+            <div class="team-row"><span class="flag">🇹🇳</span> <span>{% trans "Tunisia" %}</span></div>
+        </div>
+        <div class="group-card" onclick='filterGroup("G", ["Belgium", "Egypt", "Iran", "New Zealand"], ["بلژیک", "مصر", "ایران", "نیوزیلند"])'>
+            <div class="group-header">GROUP G</div>
+            <div class="team-row"><span class="flag">🇧🇪</span> <span>{% trans "Belgium" %}</span></div>
+            <div class="team-row"><span class="flag">🇪🇬</span> <span>{% trans "Egypt" %}</span></div>
+            <div class="team-row"><span class="flag">🇮🇷</span> <span>{% trans "Iran" %}</span></div>
+            <div class="team-row"><span class="flag">🇳🇿</span> <span>{% trans "New Zealand" %}</span></div>
+        </div>
+        <div class="group-card" onclick='filterGroup("H", ["Spain", "Cabo Verde", "Saudi Arabia", "Uruguay"], ["اسپانیا", "کیپ ورد", "عربستان", "اروگوئه"])'>
+            <div class="group-header">GROUP H</div>
+            <div class="team-row"><span class="flag">🇪🇸</span> <span>{% trans "Spain" %}</span></div>
+            <div class="team-row"><span class="flag">🇨🇻</span> <span>{% trans "Cabo Verde" %}</span></div>
+            <div class="team-row"><span class="flag">🇸🇦</span> <span>{% trans "Saudi Arabia" %}</span></div>
+            <div class="team-row"><span class="flag">🇺🇾</span> <span>{% trans "Uruguay" %}</span></div>
+        </div>
+        <div class="group-card" onclick='filterGroup("I", ["France", "Senegal", "Iraq", "Norway"], ["فرانسه", "سنگال", "عراق", "نروژ"])'>
+            <div class="group-header">GROUP I</div>
+            <div class="team-row"><span class="flag">🇫🇷</span> <span>{% trans "France" %}</span></div>
+            <div class="team-row"><span class="flag">🇸🇳</span> <span>{% trans "Senegal" %}</span></div>
+            <div class="team-row"><span class="flag">🇮🇶</span> <span>{% trans "Iraq" %}</span></div>
+            <div class="team-row"><span class="flag">🇳🇴</span> <span>{% trans "Norway" %}</span></div>
+        </div>
+        <div class="group-card" onclick='filterGroup("J", ["Argentina", "Algeria", "Austria", "Jordan"], ["آرژانتین", "الجزایر", "اتریش", "اردن"])'>
+            <div class="group-header">GROUP J</div>
+            <div class="team-row"><span class="flag">🇦🇷</span> <span>{% trans "Argentina" %}</span></div>
+            <div class="team-row"><span class="flag">🇩🇿</span> <span>{% trans "Algeria" %}</span></div>
+            <div class="team-row"><span class="flag">🇦🇹</span> <span>{% trans "Austria" %}</span></div>
+            <div class="team-row"><span class="flag">🇯🇴</span> <span>{% trans "Jordan" %}</span></div>
+        </div>
+        <div class="group-card" onclick='filterGroup("K", ["Portugal", "DR Congo", "Colombia", "Uzbekistan"], ["پرتغال", "کنگو", "کلمبیا", "ازبکستان"])'>
+            <div class="group-header">GROUP K</div>
+            <div class="team-row"><span class="flag">🇵🇹</span> <span>{% trans "Portugal" %}</span></div>
+            <div class="team-row"><span class="flag">🇨🇩</span> <span>{% trans "DR Congo" %}</span></div>
+            <div class="team-row"><span class="flag">🇨🇴</span> <span>{% trans "Colombia" %}</span></div>
+            <div class="team-row"><span class="flag">🇺🇿</span> <span>{% trans "Uzbekistan" %}</span></div>
+        </div>
+        <div class="group-card" onclick='filterGroup("L", ["England", "Croatia", "Ghana", "Panama"], ["انگلیس", "کرواسی", "غنا", "پاناما"])'>
+            <div class="group-header">GROUP L</div>
+            <div class="team-row"><span class="flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span> <span>{% trans "England" %}</span></div>
+            <div class="team-row"><span class="flag">🇭🇷</span> <span>{% trans "Croatia" %}</span></div>
+            <div class="team-row"><span class="flag">🇬🇭</span> <span>{% trans "Ghana" %}</span></div>
+            <div class="team-row"><span class="flag">🇵🇦</span> <span>{% trans "Panama" %}</span></div>
         </div>
     </div>
+
+    <h2 id="matches-title" style="text-align: {% if LANGUAGE_CODE == 'fa' %}right{% else %}left{% endif %}; margin-bottom: 24px; font-size: 2.2rem; color: var(--text-color);">
+        {% trans "All Upcoming Matches" %}
+    </h2>
+    <button id="reset-filter" onclick="showAllMatches()" style="display: none; margin-bottom: 24px;">{% trans "Show All Matches" %}</button>
+    <div id="no-match-msg" class="card" style="display: none; text-align: center; color: var(--secondary);"></div>
+
+    <div id="match-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; text-align: {% if LANGUAGE_CODE == 'fa' %}right{% else %}left{% endif %};">
+        {% for game in upcoming_games %}
+            <a href="{% url 'games:place_bet' game.id %}" class="match-item" data-teams="{{ game.home_team|lower }} {{ game.away_team|lower }}" style="text-decoration: none; color: inherit; display: block;">
+                <div class="card" style="cursor: pointer; border-top: 4px solid var(--primary); height: 100%;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 1.2rem;">
+                        <strong>{{ game.home_team }}</strong>
+                        <span style="font-size: 0.9rem; color:var(--secondary); padding: 4px 12px; background: var(--hover-bg); border-radius: 40px;">VS</span>
+                        <strong>{{ game.away_team }}</strong>
+                    </div>
+                    <div class="text-muted" style="margin: 16px 0;">{{ game.start_time|date:"d M Y, H:i" }}</div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        {% for option in game.bet_options.all %}
+                            <span style="background: var(--hover-bg); padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; color: var(--text-color);">
+                                {{ option.description }} <strong style="color:var(--accent);">{{ option.odds }}</strong>
+                            </span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </a>
+        {% empty %}
+            <div class="card" style="grid-column: 1 / -1; text-align: center;">{% trans "No matches available at the moment." %}</div>
+        {% endfor %}
+    </div>
 </div>
+
+<script>
+    function filterGroup(groupLetter, teamsEn, teamsFa) {
+        document.getElementById('matches-title').innerText = '{% trans "Matches for Group" %} ' + groupLetter;
+        document.getElementById('matches-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('reset-filter').style.display = 'inline-block';
+
+        const matches = document.querySelectorAll('.match-item');
+        let count = 0;
+        matches.forEach(match => {
+            const matchTeams = match.getAttribute('data-teams').toLowerCase();
+            const isMatchInGroup = teamsEn.some(t => matchTeams.includes(t.toLowerCase())) ||
+                                   teamsFa.some(t => matchTeams.includes(t.toLowerCase()));
+            if (isMatchInGroup) {
+                match.style.display = 'block'; count++;
+            } else {
+                match.style.display = 'none';
+            }
+        });
+
+        const noMatchMsg = document.getElementById('no-match-msg');
+        if (count === 0) {
+            noMatchMsg.style.display = 'block';
+            noMatchMsg.innerHTML = '{% trans "No matches added yet for Group" %} ' + groupLetter + '. <br><span style="font-size:0.9rem; color:var(--muted-text);">{% trans "Admin needs to add these matches in the dashboard." %}</span>';
+        } else {
+            noMatchMsg.style.display = 'none';
+        }
+    }
+
+    function showAllMatches() {
+        document.getElementById('matches-title').innerText = '{% trans "All Upcoming Matches" %}';
+        document.querySelectorAll('.match-item').forEach(m => m.style.display = 'block');
+        document.getElementById('no-match-msg').style.display = 'none';
+        document.getElementById('reset-filter').style.display = 'none';
+    }
+</script>
 {% endblock %}

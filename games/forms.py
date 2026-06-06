@@ -1,3 +1,4 @@
+# bet/games/forms.py
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -7,7 +8,7 @@ class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'email'] # 🔴 فیلدهای password نباید اینجا باشن، خود UserCreationForm اونا رو مدیریت میکنه
 
 class BetForm(forms.Form):
     bet_option = forms.ModelChoiceField(
@@ -15,7 +16,7 @@ class BetForm(forms.Form):
         widget=forms.RadioSelect,
         label="Select your bet"
     )
-    amount = forms.DecimalField(min_value=0.01, max_digits=10, decimal_places=2, label="Amount")
+    amount = forms.DecimalField(min_value=0.01, max_digits=10, decimal_places=2, label="Amount (Coins)")
 
     def __init__(self, *args, **kwargs):
         game = kwargs.pop('game', None)
@@ -27,24 +28,7 @@ class BetForm(forms.Form):
     def clean_amount(self):
         amount = self.cleaned_data['amount']
         if amount <= 0:
-            raise forms.ValidationError("Amount must be greater than zero.")
+            raise forms.ValidationError("مقدار سکه باید بیشتر از صفر باشد.")
         return amount
 
-# در انتهای فایل forms.py اضافه کنید
-class DepositForm(forms.Form):
-    amount = forms.DecimalField(
-        min_value=0.01,
-        max_digits=10,
-        decimal_places=0,  # برای تومان که واحد صحیح است، اما اگر اعشار هم می‌خواهید decimal_places=2
-        label="Amount (Toman)",
-        help_text="Positive amount only"
-    )
-
-class WithdrawForm(forms.Form):
-    amount = forms.DecimalField(
-        min_value=0.01,
-        max_digits=10,
-        decimal_places=0,
-        label="Amount (Toman)",
-        help_text="Positive amount only"
-    )
+# فرم‌های DepositForm و WithdrawForm کاملا حذف شدند.

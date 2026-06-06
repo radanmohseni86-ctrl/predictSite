@@ -6,7 +6,6 @@ from django.db import transaction
 from django.utils import timezone
 from .models import Game, BetOption, Bet, Profile
 from .forms import RegistrationForm, BetForm
-from .forms import DepositForm, WithdrawForm
 
 
 def get_or_create_profile(user):
@@ -17,7 +16,8 @@ def get_or_create_profile(user):
     return profile
 
 def home_view(request):
-    upcoming_games = Game.objects.filter(status='upcoming', start_time__gt=timezone.now()).order_by('start_time')[:6]
+    # محدودیت [:6] برداشته شد تا تمام بازی‌ها برای فیلتر شدن لود شوند
+    upcoming_games = Game.objects.filter(status='upcoming', start_time__gt=timezone.now()).order_by('start_time')
     return render(request, 'games/home.html', {'upcoming_games': upcoming_games})
 
 def register_view(request):
@@ -93,38 +93,3 @@ def user_panel_view(request):
     profile = get_or_create_profile(request.user)
     bets = request.user.bets.all().order_by('-placed_at')
     return render(request, 'games/user_panel.html', {'bets': bets, 'balance': profile.balance})
-
-@login_required
-def deposit_view(request):
-    profile = get_or_create_profile(request.user)
-    if request.method == 'POST':
-        form = DepositForm(request.POST)
-        if form.is_valid():
-            amount = form.cleaned_data['amount']
-            with transaction.atomic():
-                profile.balance += amount
-                profile.save()
-            messages.success(request, f"Successfully added {amount} Toman to your balance.")
-            return redirect('games:user_panel')
-    else:
-        form = DepositForm()
-    return render(request, 'games/deposit.html', {'form': form, 'balance': profile.balance})
-
-@login_required
-def withdraw_view(request):
-    profile = get_or_create_profile(request.user)
-    if request.method == 'POST':
-        form = WithdrawForm(request.POST)
-        if form.is_valid():
-            amount = form.cleaned_data['amount']
-            if amount > profile.balance:
-                messages.error(request, "Insufficient balance for withdrawal.")
-            else:
-                with transaction.atomic():
-                    profile.balance -= amount
-                    profile.save()
-                messages.success(request, f"Successfully withdrawn {amount} Toman from your balance.")
-            return redirect('games:user_panel')
-    else:
-        form = WithdrawForm()
-    return render(request, 'games/withdraw.html', {'form': form, 'balance': profile.balance})

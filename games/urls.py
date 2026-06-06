@@ -1,3 +1,4 @@
+# bet/games/urls.py
 from django.urls import path
 from . import views
 
@@ -11,6 +12,4 @@ urlpatterns = [
     path('games/', views.game_list_view, name='game_list'),
     path('bet/<int:game_id>/', views.place_bet_view, name='place_bet'),
     path('panel/', views.user_panel_view, name='user_panel'),
-    path('deposit/', views.deposit_view, name='deposit'),
-    path('withdraw/', views.withdraw_view, name='withdraw'),
 ]

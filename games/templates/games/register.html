@@ -1,31 +1,35 @@
 {% extends 'games/base.html' %}
-{% block title %}Sign up{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Sign up" %}{% endblock %}
 {% block content %}
 <div style="max-width: 440px; margin: 60px auto;">
     <div class="card">
-        <h2>Create account</h2>
-        <p class="text-muted" style="margin-bottom: 28px;">Join to start betting</p>
+        <h2 style="margin-bottom: 8px;">{% trans "Create account" %}</h2>
+        <p class="text-muted" style="margin-bottom: 28px;">{% trans "Join to start predicting the World Cup" %}</p>
         <form method="post">
             {% csrf_token %}
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" name="username" placeholder="Choose a username" required>
+            <div style="margin-bottom: 16px;">
+                <label style="color: var(--text-color); font-weight: 500;">{% trans "Username" %}</label>
+                <input type="text" name="username" placeholder="{% trans 'Choose a username' %}" required>
             </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" placeholder="your@email.com" required>
+            <div style="margin-bottom: 16px;">
+                <label style="color: var(--text-color); font-weight: 500;">{% trans "Email" %}</label>
+                <input type="email" name="email" placeholder="{% trans 'your@email.com' %}" required>
             </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password1" placeholder="Create a password" required>
+            <div style="margin-bottom: 16px;">
+                <label style="color: var(--text-color); font-weight: 500;">{% trans "Password" %}</label>
+                <input type="password" name="password1" placeholder="{% trans 'Create a password' %}" required>
             </div>
-            <div class="form-group">
-                <label>Confirm password</label>
-                <input type="password" name="password2" placeholder="Repeat password" required>
+            <div style="margin-bottom: 24px;">
+                <label style="color: var(--text-color); font-weight: 500;">{% trans "Confirm password" %}</label>
+                <input type="password" name="password2" placeholder="{% trans 'Repeat password' %}" required>
             </div>
-            <button type="submit">Sign up</button>
+            <button type="submit" style="width: 100%;">{% trans "Sign up" %}</button>
         </form>
-        <p style="margin-top: 24px; text-align: center;">Already have an account? <a href="{% url 'games:login' %}" style="color: #3b82f6;">Login</a></p>
+        <p style="margin-top: 24px; text-align: center; color: var(--muted-text);">
+            {% trans "Already have an account?" %}
+            <a href="{% url 'games:login' %}" style="color: var(--accent); text-decoration: none; font-weight: bold;">{% trans "Login" %}</a>
+        </p>
     </div>
 </div>
 {% endblock %}
