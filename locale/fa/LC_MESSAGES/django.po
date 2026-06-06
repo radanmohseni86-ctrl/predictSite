@@ -290,3 +290,9 @@ msgstr "ساحل عاج"
 
 msgid "New Zealand"
 msgstr "نیوزیلند"
+
+msgid "Group Matches"
+msgstr "مسابقات گروه"
+
+msgid "Select a group to see its matches."
+msgstr "برای مشاهده مسابقات، روی یکی از گروه‌های بالا کلیک کنید."
