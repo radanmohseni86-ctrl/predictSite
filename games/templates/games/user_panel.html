@@ -12,8 +12,9 @@
     </p>
 </div>
 
+<h3 style="margin-top: 32px; margin-bottom: 16px; color: var(--primary);">🎯 {% trans "Match Predictions" %}</h3>
 {% if bets %}
-    <div style="overflow-x: auto;">
+    <div style="overflow-x: auto; margin-bottom: 40px;">
         <table>
             <thead>
                 <tr><th>{% trans "Match" %}</th><th>{% trans "Bet Type" %}</th><th>{% trans "Coins" %}</th><th>{% trans "Date" %}</th><th>{% trans "Status" %}</th><th>{% trans "Result" %}</th></tr>
@@ -21,10 +22,10 @@
             <tbody>
                 {% for bet in bets %}
                 <tr>
-                    <td>{{ bet.bet_option.game.home_team }} vs {{ bet.bet_option.game.away_team }}</td>
+                    <td>{% trans bet.bet_option.game.home_team %} vs {% trans bet.bet_option.game.away_team %}</td>
                     <td><strong>{{ bet.bet_option.description }}</strong> ({{ bet.bet_option.odds }})</td>
                     <td>{{ bet.amount }}</td>
-                    <td>{{ bet.placed_at|date:"Y/m/d H:i" }}</td>
+                    <td dir="ltr">{{ bet.placed_at|date:"Y/m/d H:i" }}</td>
                     <td>{% if bet.is_settled %}{% trans "Settled" %}{% else %}{% trans "Pending" %}{% endif %}</td>
                     <td>{% if bet.is_settled %}{% if bet.won %}<span style="color:var(--accent);">{% trans "Won" %} (+{{ bet.payout }})</span>{% else %}<span style="color:var(--secondary);">{% trans "Lost" %}</span>{% endif %}{% else %}-{% endif %}</td>
                 </tr>
@@ -33,9 +34,54 @@
         </table>
     </div>
 {% else %}
-    <div class="card" style="text-align: center;">
-        <p>{% trans "No predictions yet." %}</p>
-        <a href="{% url 'games:game_list' %}"><button style="margin-top: 12px;">{% trans "Browse Games" %}</button></a>
+    <div class="card" style="text-align: center; margin-bottom: 40px;">
+        <p style="color: var(--muted-text);">{% trans "No match predictions yet." %}</p>
+    </div>
+{% endif %}
+
+<h3 style="margin-top: 32px; margin-bottom: 16px; color: var(--primary);">🏆 {% trans "Group Standings Predictions" %}</h3>
+{% if group_bets %}
+    <div style="overflow-x: auto; margin-bottom: 40px;">
+        <table>
+            <thead>
+                <tr>
+                    <th>{% trans "Group" %}</th>
+                    <th>{% trans "1st Place" %}</th>
+                    <th>{% trans "2nd Place" %}</th>
+                    <th>{% trans "Coins" %}</th>
+                    <th>{% trans "Date" %}</th>
+                    <th>{% trans "Status" %}</th>
+                    <th>{% trans "Result" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for gbet in group_bets %}
+                <tr>
+                    <td style="color: var(--secondary); font-weight: bold; font-size: 1.2rem;">{{ gbet.group_name }}</td>
+                    <td>🥇 {% trans gbet.predicted_first %}</td>
+                    <td>🥈 {% trans gbet.predicted_second %}</td>
+                    <td>{{ gbet.amount }}</td>
+                    <td dir="ltr">{{ gbet.placed_at|date:"Y/m/d H:i" }}</td>
+                    <td>{% if gbet.is_settled %}{% trans "Settled" %}{% else %}{% trans "Pending" %}{% endif %}</td>
+                    <td>
+                        {% if gbet.is_settled %}
+                            {% if gbet.won %}
+                                <span style="color:var(--accent);">{% trans "Won" %} (+{{ gbet.payout }})</span>
+                            {% else %}
+                                <span style="color:var(--secondary);">{% trans "Lost" %}</span>
+                            {% endif %}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="card" style="text-align: center; margin-bottom: 40px;">
+        <p style="color: var(--muted-text);">{% trans "No group predictions yet." %}</p>
     </div>
 {% endif %}
 {% endblock %}

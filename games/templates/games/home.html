@@ -26,6 +26,18 @@
     }
     .team-row:last-child { border-bottom: none; }
     .flag { font-size: 1.8rem; }
+
+    /* استایل دکمه پیش‌بینی رتبه در باکس داینامیک */
+    .btn-predict {
+        padding: 12px 32px; font-size: 1.1rem; display: inline-block;
+        text-decoration: none; border-radius: 40px; margin-top: 16px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white; font-weight: bold; transition: 0.3s;
+        box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+    }
+    .btn-predict:hover {
+        box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5); transform: translateY(-3px);
+    }
 </style>
 
 <div style="text-align: center; padding: 40px 0;">
@@ -37,9 +49,7 @@
         {% trans "Select a group below to view upcoming matches and make your predictions to earn coins." %}
     </p>
 
-    <!-- 12 Real World Cup Groups -->
     <div class="groups-container">
-        <!-- Group A -->
         <div class="group-card" onclick='filterGroup("A", ["Mexico", "South Africa", "South Korea", "Czech Republic"], ["مکزیک", "آفریقای جنوبی", "کره جنوبی", "جمهوری چک"])'>
             <div class="group-header">GROUP A</div>
             <div class="team-row"><span class="flag">🇲🇽</span> <span>{% trans "Mexico" %}</span></div>
@@ -47,7 +57,6 @@
             <div class="team-row"><span class="flag">🇰🇷</span> <span>{% trans "South Korea" %}</span></div>
             <div class="team-row"><span class="flag">🇨🇿</span> <span>{% trans "Czech Republic" %}</span></div>
         </div>
-        <!-- Group B -->
         <div class="group-card" onclick='filterGroup("B", ["Canada", "Bosnia and Herzegovina", "Qatar", "Switzerland"], ["کانادا", "بوسنی و هرزگوین", "قطر", "سوئیس"])'>
             <div class="group-header">GROUP B</div>
             <div class="team-row"><span class="flag">🇨🇦</span> <span>{% trans "Canada" %}</span></div>
@@ -55,7 +64,6 @@
             <div class="team-row"><span class="flag">🇶🇦</span> <span>{% trans "Qatar" %}</span></div>
             <div class="team-row"><span class="flag">🇨🇭</span> <span>{% trans "Switzerland" %}</span></div>
         </div>
-        <!-- Group C -->
         <div class="group-card" onclick='filterGroup("C", ["Brazil", "Morocco", "Haiti", "Scotland"], ["برزیل", "مراکش", "هائیتی", "اسکاتلند"])'>
             <div class="group-header">GROUP C</div>
             <div class="team-row"><span class="flag">🇧🇷</span> <span>{% trans "Brazil" %}</span></div>
@@ -63,7 +71,6 @@
             <div class="team-row"><span class="flag">🇭🇹</span> <span>{% trans "Haiti" %}</span></div>
             <div class="team-row"><span class="flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span> <span>{% trans "Scotland" %}</span></div>
         </div>
-        <!-- Group D -->
         <div class="group-card" onclick='filterGroup("D", ["United States", "Paraguay", "Australia", "Türkiye"], ["آمریکا", "ایالات متحده", "پاراگوئه", "استرالیا", "ترکیه"])'>
             <div class="group-header">GROUP D</div>
             <div class="team-row"><span class="flag">🇺🇸</span> <span>{% trans "USA" %}</span></div>
@@ -71,7 +78,6 @@
             <div class="team-row"><span class="flag">🇦🇺</span> <span>{% trans "Australia" %}</span></div>
             <div class="team-row"><span class="flag">🇹🇷</span> <span>{% trans "Turkey" %}</span></div>
         </div>
-        <!-- Group E -->
         <div class="group-card" onclick='filterGroup("E", ["Germany", "Curaçao", "Ecuador", "Ivory Coast"], ["آلمان", "کوراسائو", "اکوادور", "ساحل عاج"])'>
             <div class="group-header">GROUP E</div>
             <div class="team-row"><span class="flag">🇩🇪</span> <span>{% trans "Germany" %}</span></div>
@@ -79,7 +85,6 @@
             <div class="team-row"><span class="flag">🇪🇨</span> <span>{% trans "Ecuador" %}</span></div>
             <div class="team-row"><span class="flag">🇨🇮</span> <span>{% trans "Ivory Coast" %}</span></div>
         </div>
-        <!-- Group F -->
         <div class="group-card" onclick='filterGroup("F", ["Netherlands", "Japan", "Sweden", "Tunisia"], ["هلند", "ژاپن", "سوئد", "تونس"])'>
             <div class="group-header">GROUP F</div>
             <div class="team-row"><span class="flag">🇳🇱</span> <span>{% trans "Netherlands" %}</span></div>
@@ -87,7 +92,6 @@
             <div class="team-row"><span class="flag">🇸🇪</span> <span>{% trans "Sweden" %}</span></div>
             <div class="team-row"><span class="flag">🇹🇳</span> <span>{% trans "Tunisia" %}</span></div>
         </div>
-        <!-- Group G -->
         <div class="group-card" onclick='filterGroup("G", ["Belgium", "Egypt", "Iran", "New Zealand"], ["بلژیک", "مصر", "ایران", "نیوزیلند"])'>
             <div class="group-header">GROUP G</div>
             <div class="team-row"><span class="flag">🇧🇪</span> <span>{% trans "Belgium" %}</span></div>
@@ -95,7 +99,6 @@
             <div class="team-row"><span class="flag">🇮🇷</span> <span>{% trans "Iran" %}</span></div>
             <div class="team-row"><span class="flag">🇳🇿</span> <span>{% trans "New Zealand" %}</span></div>
         </div>
-        <!-- Group H -->
         <div class="group-card" onclick='filterGroup("H", ["Spain", "Cabo Verde", "Saudi Arabia", "Uruguay"], ["اسپانیا", "کیپ ورد", "عربستان", "اروگوئه"])'>
             <div class="group-header">GROUP H</div>
             <div class="team-row"><span class="flag">🇪🇸</span> <span>{% trans "Spain" %}</span></div>
@@ -103,7 +106,6 @@
             <div class="team-row"><span class="flag">🇸🇦</span> <span>{% trans "Saudi Arabia" %}</span></div>
             <div class="team-row"><span class="flag">🇺🇾</span> <span>{% trans "Uruguay" %}</span></div>
         </div>
-        <!-- Group I -->
         <div class="group-card" onclick='filterGroup("I", ["France", "Senegal", "Iraq", "Norway"], ["فرانسه", "سنگال", "عراق", "نروژ"])'>
             <div class="group-header">GROUP I</div>
             <div class="team-row"><span class="flag">🇫🇷</span> <span>{% trans "France" %}</span></div>
@@ -111,7 +113,6 @@
             <div class="team-row"><span class="flag">🇮🇶</span> <span>{% trans "Iraq" %}</span></div>
             <div class="team-row"><span class="flag">🇳🇴</span> <span>{% trans "Norway" %}</span></div>
         </div>
-        <!-- Group J -->
         <div class="group-card" onclick='filterGroup("J", ["Argentina", "Algeria", "Austria", "Jordan"], ["آرژانتین", "الجزایر", "اتریش", "اردن"])'>
             <div class="group-header">GROUP J</div>
             <div class="team-row"><span class="flag">🇦🇷</span> <span>{% trans "Argentina" %}</span></div>
@@ -119,7 +120,6 @@
             <div class="team-row"><span class="flag">🇦🇹</span> <span>{% trans "Austria" %}</span></div>
             <div class="team-row"><span class="flag">🇯🇴</span> <span>{% trans "Jordan" %}</span></div>
         </div>
-        <!-- Group K -->
         <div class="group-card" onclick='filterGroup("K", ["Portugal", "DR Congo", "Colombia", "Uzbekistan"], ["پرتغال", "کنگو", "کلمبیا", "ازبکستان"])'>
             <div class="group-header">GROUP K</div>
             <div class="team-row"><span class="flag">🇵🇹</span> <span>{% trans "Portugal" %}</span></div>
@@ -127,7 +127,6 @@
             <div class="team-row"><span class="flag">🇨🇴</span> <span>{% trans "Colombia" %}</span></div>
             <div class="team-row"><span class="flag">🇺🇿</span> <span>{% trans "Uzbekistan" %}</span></div>
         </div>
-        <!-- Group L -->
         <div class="group-card" onclick='filterGroup("L", ["England", "Croatia", "Ghana", "Panama"], ["انگلیس", "کرواسی", "غنا", "پاناما"])'>
             <div class="group-header">GROUP L</div>
             <div class="team-row"><span class="flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span> <span>{% trans "England" %}</span></div>
@@ -137,23 +136,29 @@
         </div>
     </div>
 
-    <!-- بخش هدر مسابقات فیلتر شده -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
         <h2 id="matches-title" style="margin: 0; font-size: 2.2rem; color: var(--text-color);">
             {% trans "Group Matches" %}
         </h2>
-        <!-- 🔴 تغییر مهم: دکمه تبدیل به لینک صفحه همه مسابقات شد -->
         <a href="{% url 'games:game_list' %}" class="btn" style="text-decoration: none;">
             {% trans "Show All Matches" %} ➔
         </a>
     </div>
 
-    <!-- 🔴 متن راهنمای اولیه -->
     <div id="no-match-msg" class="card" style="text-align: center; color: var(--muted-text); margin-bottom: 24px;">
         {% trans "Select a group to see its matches." %}
     </div>
 
-    <!-- گرید مسابقات (به صورت پیش‌فرض تمام مسابقات مخفی (display:none) هستند) -->
+    <div id="group-predict-section" class="card" style="display: none; text-align: center; margin-bottom: 32px; border: 2px dashed var(--accent); background: rgba(0, 255, 135, 0.05);">
+        <h3 id="group-predict-title" style="margin-bottom: 12px; font-size: 1.8rem; color: var(--text-color);"></h3>
+        <p style="color: var(--muted-text); margin-bottom: 20px; font-size: 1.1rem;">
+            {% trans "Guess the exact 1st and 2nd place teams to win x8.50 your coins!" %}
+        </p>
+        <a id="group-predict-btn" href="#" class="btn-predict">
+            🥇🥈 {% trans "Place Group Prediction" %}
+        </a>
+    </div>
+
     <div id="match-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; text-align: {% if LANGUAGE_CODE == 'fa' %}right{% else %}left{% endif %};">
         {% for game in upcoming_games %}
             <a href="{% url 'games:place_bet' game.id %}" class="match-item" data-teams="{{ game.home_team|lower }} {{ game.away_team|lower }}" style="text-decoration: none; color: inherit; display: none;">
@@ -179,8 +184,16 @@
 
 <script>
     function filterGroup(groupLetter, teamsEn, teamsFa) {
+        // تغییر عنوان لیست بازی‌ها
         document.getElementById('matches-title').innerText = '{% trans "Matches for Group" %} ' + groupLetter;
         document.getElementById('matches-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // آپدیت لینک و متن باکس پیش‌بینی گروه و نمایش آن
+        document.getElementById('group-predict-title').innerText = '{% trans "Predict Standings for Group" %} ' + groupLetter;
+        // ساخت یک لینک پایه و جایگزینی کلمه DUMMY_GROUP با حرف گروه انتخاب شده
+        let dummyUrl = "{% url 'games:group_bet' 'DUMMY_GROUP' %}";
+        document.getElementById('group-predict-btn').href = dummyUrl.replace('DUMMY_GROUP', groupLetter);
+        document.getElementById('group-predict-section').style.display = 'block';
 
         const matches = document.querySelectorAll('.match-item');
         let count = 0;

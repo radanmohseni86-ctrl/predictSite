@@ -1,0 +1,83 @@
+{% extends 'games/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Predict Group" %} {{ group_letter }}{% endblock %}
+{% block content %}
+<div style="max-width: 600px; margin: 40px auto;">
+    <div class="card" style="padding: 40px 30px; text-align: center; border-top: 4px solid var(--secondary);">
+        <h1 style="font-size: 2.2rem; font-weight: 900; margin-bottom: 24px; color: var(--text-color);">
+            {% trans "Predict Group" %} <span style="color: var(--secondary);">{{ group_letter }}</span>
+        </h1>
+
+        <div style="background:var(--hover-bg); border: 1px solid var(--accent); display:inline-block; padding:10px 24px; border-radius:60px; margin-bottom: 30px;">
+            <span style="color: var(--muted-text);">{% trans "Balance:" %}</span> <strong class="balance" style="font-size: 1.2rem;">{{ balance|floatformat:0 }}</strong>
+        </div>
+
+        <form method="post" style="text-align: {% if LANGUAGE_CODE == 'fa' %}right{% else %}left{% endif %};" dir="{% if LANGUAGE_CODE == 'fa' %}rtl{% else %}ltr{% endif %}">
+            {% csrf_token %}
+
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label style="color: var(--text-color); font-weight: 600; font-size: 1.1rem; display: block; margin-bottom: 8px;">🥇 {{ form.predicted_first.label }}</label>
+                {{ form.predicted_first }}
+            </div>
+
+            <div class="form-group" style="margin-bottom: 24px;">
+                <label style="color: var(--text-color); font-weight: 600; font-size: 1.1rem; display: block; margin-bottom: 8px;">🥈 {{ form.predicted_second.label }}</label>
+                {{ form.predicted_second }}
+            </div>
+
+            <div class="form-group" style="margin-bottom: 30px;">
+                <label style="color: var(--text-color); font-weight: 600; font-size: 1.1rem; display: block; margin-bottom: 8px;">💰 {{ form.amount.label }}</label>
+                {{ form.amount }}
+
+                {% if form.errors %}
+                    <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; border-radius: 12px; padding: 12px; color: #ef4444; margin-top: 16px; font-size: 0.95rem;">
+                        {{ form.non_field_errors }}
+                        {{ form.predicted_first.errors }}
+                        {{ form.amount.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div style="background: rgba(255,255,255,0.05); padding: 16px; border-radius: 16px; margin-bottom: 24px;">
+                <p style="color: var(--accent); font-size: 1rem; text-align: center; margin: 0;">
+                    {% trans "Multiplier for exact prediction:" %} <strong style="font-size: 1.3rem;">X 8.50</strong>
+                </p>
+            </div>
+
+            <button type="submit" style="width: 100%; font-size: 1.1rem; padding: 16px;">{% trans "Confirm Prediction" %}</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    .form-group select {
+        width: 100%;
+        padding: 14px 20px;
+        border-radius: 16px;
+        background-color: var(--input-bg);
+        border: 2px solid var(--input-border);
+        color: var(--text-color);
+        font-family: inherit;
+        font-size: 1.1rem;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='gray' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        /* فلش سلکت‌باکس در انگلیسی سمت راست و در فارسی سمت چپ قرار می‌گیرد */
+        background-position: {% if LANGUAGE_CODE == 'fa' %}left 1rem center{% else %}right 1rem center{% endif %};
+        background-size: 1em;
+        transition: all 0.3s;
+    }
+    .form-group select:focus {
+        border-color: var(--secondary);
+        box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+        outline: none;
+    }
+    .form-group select option {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        padding: 10px;
+    }
+</style>
+{% endblock %}

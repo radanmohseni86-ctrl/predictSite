@@ -52,6 +52,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+JAZZMIN_SETTINGS = {
+    "site_title": "مدیریت پیش‌بینی",
+    "site_header": "World Cup 2026",
+    "site_brand": "WC Admin",
+    "welcome_sign": "به پنل مدیریت جام جهانی خوش آمدید",
+    "search_model": ["auth.User", "games.Game"],
+    "show_ui_builder": False,
+    "theme": "darkly", # تم تاریک و جذاب
+}
+
 ROOT_URLCONF = 'bet.urls'  # project name is 'bet'
 
 TEMPLATES = [

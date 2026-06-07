@@ -296,3 +296,78 @@ msgstr "مسابقات گروه"
 
 msgid "Select a group to see its matches."
 msgstr "برای مشاهده مسابقات، روی یکی از گروه‌های بالا کلیک کنید."
+
+msgid "Predict Standings"
+msgstr "پیش‌بینی رتبه صعود"
+
+msgid "Predict Group"
+msgstr "پیش‌بینی گروه"
+
+msgid "Confirm Prediction"
+msgstr "ثبت پیش‌بینی"
+
+msgid "Predict Standings for Group"
+msgstr "پیش‌بینی رتبه‌بندی گروه"
+
+msgid "Guess the exact 1st and 2nd place teams to win x8.50 your coins!"
+msgstr "رتبه اول و دوم را دقیق حدس بزنید و ۸.۵ برابر سکه برنده شوید!"
+
+msgid "Place Group Prediction"
+msgstr "ثبت پیش‌بینی گروه"
+
+msgid "1st Place Team"
+msgstr "رتبه اول صعود کننده"
+
+msgid "2nd Place Team"
+msgstr "رتبه دوم صعود کننده"
+
+msgid "Amount (Coins)"
+msgstr "مبلغ (سکه)"
+
+msgid "The first and second teams cannot be the same!"
+msgstr "تیم اول و دوم نمی‌توانند یکسان باشند!"
+
+msgid "Multiplier for exact prediction:"
+msgstr "ضریب جایزه در صورت پیش‌بینی دقیق ترتیب:"
+
+msgid "Coin amount must be greater than zero."
+msgstr "مقدار سکه باید بیشتر از صفر باشد."
+
+msgid "Registration successful!"
+msgstr "ثبت‌نام با موفقیت انجام شد!"
+
+msgid "Welcome %(username)s!"
+msgstr "خوش آمدید %(username)s!"
+
+msgid "Logged out successfully."
+msgstr "با موفقیت خارج شدید."
+
+msgid "Your prediction was placed successfully!"
+msgstr "پیش‌بینی شما با موفقیت ثبت شد!"
+
+msgid "Not enough coins!"
+msgstr "موجودی سکه شما کافی نیست!"
+
+msgid "Prediction for Group %(group_letter)s placed successfully."
+msgstr "پیش‌بینی شما برای گروه %(group_letter)s با موفقیت ثبت شد."
+
+msgid "Match Predictions"
+msgstr "پیش‌بینی مسابقات"
+
+msgid "No match predictions yet."
+msgstr "هنوز پیش‌بینی مسابقه‌ای ثبت نکرده‌اید."
+
+msgid "Group Standings Predictions"
+msgstr "پیش‌بینی صعود از گروه"
+
+msgid "Group"
+msgstr "گروه"
+
+msgid "1st Place"
+msgstr "رتبه اول"
+
+msgid "2nd Place"
+msgstr "رتبه دوم"
+
+msgid "No group predictions yet."
+msgstr "هنوز پیش‌بینی گروهی ثبت نکرده‌اید."

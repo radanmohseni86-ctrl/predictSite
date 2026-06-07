@@ -12,4 +12,5 @@ urlpatterns = [
     path('games/', views.game_list_view, name='game_list'),
     path('bet/<int:game_id>/', views.place_bet_view, name='place_bet'),
     path('panel/', views.user_panel_view, name='user_panel'),
+    path('group-bet/<str:group_letter>/', views.place_group_bet_view, name='group_bet'),
 ]
